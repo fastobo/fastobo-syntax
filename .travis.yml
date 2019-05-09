@@ -1,0 +1,30 @@
+sudo: false
+dist: xenial
+language: Rust
+
+rust:
+  - stable
+  - beta
+  - nightly
+
+cache:
+  cargo: true
+  directories:
+    - $HOME/.cargo/bin
+
+env:
+  global:
+    - PATH="$HOME/.cargo/bin:$PATH"
+
+install:
+  - ci/travis/install.sh
+
+script:
+  - cargo tarpaulin -v --out Xml --ciserver travis-ci
+
+after_script:
+  - curl -SsL "https://codecov.io/bash" | bash
+
+notifications:
+  email:
+  - althonosdev@gmail.com
