@@ -3,7 +3,6 @@ extern crate fastobo_syntax;
 use fastobo_syntax::OboParser;
 use fastobo_syntax::Rule;
 
-
 macro_rules! test_parse {
     ($rule:ident, $input:literal) => ({
         match OboParser::parse(Rule::$rule, $input) {
@@ -28,7 +27,6 @@ fn qualifier_list() {
         r#"{comment="NYBG:Dario_Cavaliere", comment="NYBG:Brandon_Sinn"}"#
     )
 }
-
 
 #[test]
 fn qualifier() {
