@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/43b728e...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.2.1...HEAD
+
+
+## [v0.2.1] - 2019-05-09
+
+[v0.2.1]: https://github.com/fastobo/fastobo-syntax/compare/syntax/43b728e...v0.2.1
+
+### Changed
+- Outsourced crate to `fastobo/fastobo-syntax` GitHub repository.
 
 
 ## v0.2.0 - 2019-05-06
@@ -28,6 +36,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Fix invalid header values being successfully parsed into `Unreserved` nonetheless.
+
 
 ## v0.1.0 - 2019-03-30
 
