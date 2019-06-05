@@ -35,3 +35,28 @@ fn qualifier() {
         r#"comment="NYBG:Dario_Cavaliere""#
     )
 }
+
+#[test]
+fn xref() {
+    // Xref ID only
+    test_parse!(Xref, r#"https://www.ncbi.nlm.nih.gov/pubmed/28402395"#);
+    test_parse!(Xref, r#"DOI:10.1086/522843"#);
+    test_parse!(Xref, r#"KEGG_COMPOUND"#);
+
+    // Xref ID & description
+    test_parse!(Xref, r#"DOI:10.1086/522843 "Gordon, Deborah. American Naturalist: Natural History Note. Dec. 2007""#);
+}
+
+#[test]
+fn xreflist() {
+    // Empty
+    test_parse!(XrefList, r#"[]"#);
+
+    // Single Xref, ID only
+    test_parse!(XrefList, r#"[https://www.ncbi.nlm.nih.gov/pubmed/28402395]"#);
+    test_parse!(XrefList, r#"[DOI:10.1086/522843]"#);
+    test_parse!(XrefList, r#"[KEGG_COMPOUND]"#);
+
+    // Single Xref, ID & description
+    test_parse!(XrefList, r#"[DOI:10.1086/522843 "Gordon, Deborah. American Naturalist: Natural History Note. Dec. 2007"]"#);
+}
