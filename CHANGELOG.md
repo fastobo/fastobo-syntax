@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.0...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.1...HEAD
+
+## [v0.3.1] - 2019-06-04
+
+[v0.3.1]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.0...v0.3.1
+
+### Fixed
+- `XrefId` rule allowing whitespaces, causing a bug with some Xref lists.
 
 
 ## [v0.3.0] - 2019-05-14
