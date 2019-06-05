@@ -149,8 +149,8 @@ NonCanonicalIdLocal = @{ NonWsChar* }
 
 Xref         = { Id ~ QuotedString? }
 
-XrefChar     = { !"," ~ !"]" ~ NonWsChar }
-XrefId       = { XrefChar+ }
+XrefChar     = ${ !"," ~ !"]" ~ NonWsChar }
+XrefId       = @{ XrefChar+ }
 XrefListItem = { XrefId ~ QuotedString? }
 XrefList     = {"[" ~ XrefListItem? ~ ("," ~ XrefListItem)* ~ "]"}
 
