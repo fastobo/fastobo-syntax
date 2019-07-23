@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.2...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.3...HEAD
+
+## [v0.3.3] - 2019-07-23
+
+[v0.3.3]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.2...v0.3.3
+
+### Changed
+- `Iso8601DateTime` rule to allow parsing `Iso8601Fraction` with `f32::from_str`.
 
 
 ## [v0.3.2] - 2019-07-23
