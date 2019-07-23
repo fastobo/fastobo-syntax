@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.1...HEAD
 
+### Fixed
+- `Iso8601DateTime` rule support for dates with fractional seconds components.
+
+
 ## [v0.3.1] - 2019-06-04
 
 [v0.3.1]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.0...v0.3.1
@@ -22,7 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.3.0]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.2.1...v0.3.0
 
 ### Added
-- Add support for `is_asymmetric` typedef clause in grammar.
+- Support for `is_asymmetric` typedef clause in grammar.
 
 
 ## [v0.2.1] - 2019-05-09

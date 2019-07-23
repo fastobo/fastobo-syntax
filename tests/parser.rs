@@ -13,6 +13,12 @@ macro_rules! test_parse {
 }
 
 #[test]
+fn iso_date() {
+    test_parse!(Iso8601DateTime, "2018-09-05T09:48:03Z");
+    test_parse!(Iso8601DateTime, "2018-09-05T09:48:03.106Z");
+}
+
+#[test]
 fn header_clause() {
     test_parse!(
         HeaderClause,
