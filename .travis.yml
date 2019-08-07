@@ -20,7 +20,6 @@ install:
 - ci/travis/install.sh
 
 script:
-- cargo test
 - cargo tarpaulin -v --out Xml --ciserver travis-ci
 
 after_script:
