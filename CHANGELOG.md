@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.3...HEAD
 
+### Added
+- Added BOSC 2019 poster reference to `README.md`.
+
+
 ## [v0.3.3] - 2019-07-23
 
 [v0.3.3]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.2...v0.3.3
