@@ -32,7 +32,11 @@ fn header_clause() {
     test_parse!(
         HeaderClause,
         "treat-xrefs-as-reverse-genus-differentia: TEST part_of something"
-    )
+    );
+    test_parse!(
+        HeaderClause,
+        r#"synonymtypedef: systematic_synonym "Systematic synonym" EXACT"#
+    );
 }
 
 #[test]
