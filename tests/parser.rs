@@ -6,7 +6,7 @@ use fastobo_syntax::Rule;
 macro_rules! test_parse {
     ($rule:ident, $input:literal) => ({
         match OboParser::parse(Rule::$rule, $input) {
-            Ok(_) => (),
+            Ok(mut pairs) => assert_eq!(pairs.next().unwrap().as_str(), $input),
             Err(e) => panic!("could not parse {:?}:\n{}", $input, e),
         }
     })
