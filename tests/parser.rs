@@ -12,6 +12,15 @@ macro_rules! test_parse {
     })
 }
 
+macro_rules! test_not_parse {
+    ($rule:ident, $input:literal) => ({
+        match OboParser::parse(Rule::$rule, $input) {
+            Err(_) => (),
+            Ok(x) => panic!("successfully parsed {:?}:\n{}", $input, x),
+        }
+    })
+}
+
 #[test]
 fn iso_date() {
     test_parse!(Iso8601DateTime, "2018-09-05T09:48:03Z");
@@ -40,6 +49,22 @@ fn qualifier() {
         Qualifier,
         r#"comment="NYBG:Dario_Cavaliere""#
     )
+}
+
+#[test]
+fn synonym() {
+    test_parse!(
+        Synonym,
+        r#""ciliated organ of asymmetry" EXACT TYPE [ZFIN:ZDB-PUB-050221-4]"#
+    );
+    test_parse!(
+        Synonym,
+        r#""ciliated organ of asymmetry" EXACT [ZFIN:ZDB-PUB-050221-4]"#
+    );
+    test_not_parse!(
+        Synonym,
+        r#""ciliated organ of asymmetry" EXACT_TYPE [ZFIN:ZDB-PUB-050221-4]"#
+    );
 }
 
 #[test]

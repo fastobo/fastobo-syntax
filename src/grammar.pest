@@ -353,8 +353,8 @@ InstanceClause = {
 
 // 3.6 Synonym scope
 
-SynonymScope = @{ "EXACT" | "BROAD" | "NARROW" | "RELATED" }
-Synonym = { QuotedString ~ SynonymScope ~ WhitespaceChar ~ SynonymTypeId? ~ XrefList }
+SynonymScope = @{ ("EXACT" | "BROAD" | "NARROW" | "RELATED") ~ &ws }
+Synonym = { QuotedString ~ SynonymScope ~ SynonymTypeId? ~ XrefList }
 
 // 4.0 Misc
 
