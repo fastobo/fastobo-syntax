@@ -7,10 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.4...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.5...HEAD
 
 
-## [v0.3.4] - 2019-10-05
+## [v0.3.5] - 2019-10-05
+
+[v0.3.5]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.4...v0.3.5
+
+### Fixed
+- `Synonym` production rule breaking on valid synonyms with `v0.3.4`.
+
+
+## [v0.3.4] - 2019-10-05 - **YANKED**
 
 [v0.3.4]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.3...v0.3.4
 
