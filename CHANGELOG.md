@@ -7,10 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.3...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.4...HEAD
+
+
+## [v0.3.4] - 2019-10-05
+
+[v0.3.4]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.3...v0.3.4
 
 ### Added
 - Added BOSC 2019 poster reference to `README.md`.
+
+### Fixed
+- `Synonym` production rule parsing synonym types without whitespace after scope.
 
 
 ## [v0.3.3] - 2019-07-23
