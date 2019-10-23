@@ -110,7 +110,7 @@ QualifierList  =  { "{" ~ Qualifier ~ ("," ~ Qualifier)* ~ "}" }
 
 // 2.4 Clause Values
 
-QuotedString   = @{ "\"" ~ (!"\"" ~ ("!" | OboChar))* ~ "\"" }
+QuotedString   = @{ "\"" ~ (!"\"" ~ ("\\\"" | ANY))* ~ "\"" }
 UnquotedString = @{ OboChar+ }
 
 
