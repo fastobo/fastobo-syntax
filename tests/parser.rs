@@ -95,3 +95,11 @@ fn xreflist() {
     // Single Xref, ID & description
     test_parse!(XrefList, r#"[DOI:10.1086/522843 "Gordon, Deborah. American Naturalist: Natural History Note. Dec. 2007"]"#);
 }
+
+#[test]
+fn header_frame() {
+    // with Unix endlines
+    test_parse!(HeaderFrame, r#"format-version: 1.4\ndata-version: 1\n"#);
+    // with Windows endlines
+    test_parse!(HeaderFrame, r#"format-version: 1.4\r\ndata-version: 1\r\n"#);
+}

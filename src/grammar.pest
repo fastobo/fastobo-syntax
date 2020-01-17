@@ -86,7 +86,7 @@ Digit     = @{ ASCII_DIGIT }
 // 2.2.1 Spacing Characters
 
 WhitespaceChar = _{ " " | "\t" | "\u{0020}" }
-NewlineChar    = _{ "\r" | "\n" | "\u{000c}"}
+NewlineChar    = _{ "\r\n" | "\n" }
 ws             = _{ WhitespaceChar+ }
 nl             = _{ WhitespaceChar* ~ NewlineChar}
 
