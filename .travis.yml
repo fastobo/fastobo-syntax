@@ -8,8 +8,8 @@ rust:
 - nightly
 
 cache:
-  cargo: true
   directories:
+  - "$TRAVIS_BUILD_DIR/target"
   - "$HOME/.cargo/bin"
 
 env:

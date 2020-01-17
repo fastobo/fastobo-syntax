@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.6...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.7...HEAD
+
+
+## [v0.3.7] - 2020-01-18
+
+[v0.3.7]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.6...v0.3.7
+
+### Fixed
+- Slightly improve parsing of quoted strings in `grammar.pest`.
+- Fixed Windows newlines not being recognized.
+
 
 ## [v0.3.6] - 2019-10-05
 
