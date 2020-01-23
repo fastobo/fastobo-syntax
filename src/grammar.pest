@@ -177,7 +177,7 @@ NaiveYear     = @{ Digit{4} }
 NaiveHour     = @{ ('0'..'1' ~ '0' .. '9') | ("2" ~ '0' .. '3') }
 NaiveMinute   = @{ ('0'..'5' ~ '0' .. '9') }
 
-HeaderClause = {
+HeaderClause = { WhitespaceChar* ~ (
     FormatVersionTag ~ UnquotedString
   | DataVersionTag ~ UnquotedString
   | DateTag ~ NaiveDateTime
@@ -201,7 +201,7 @@ HeaderClause = {
   | OntologyTag ~ UnquotedString
   | OwlAxiomsTag ~ UnquotedString
   | Unreserved ~ ":" ~ UnquotedString
-}
+)}
 
 Unreserved = @{
     !FormatVersionTag ~
@@ -232,14 +232,14 @@ Unreserved = @{
 // 3.3 Term Frames
 
 TermFrame = {
-    "[Term]" ~ nl
-    ~ "id:" ~ ClassId ~ EOL
+    WhitespaceChar* ~ "[Term]" ~ nl
+    ~ WhitespaceChar* ~ "id:" ~ ClassId ~ EOL
     ~ (TermClauseLine | nl)*
 }
 TermClauseLine = {
     TermClause ~ EOL
 }
-TermClause = {
+TermClause = { WhitespaceChar* ~ (
     IsAnonymousTag ~ Boolean
   | NameTag ~ UnquotedString
   | NamespaceTag ~ NamespaceId
@@ -262,20 +262,20 @@ TermClause = {
   | ConsiderTag ~ ClassId
   | CreatedByTag ~ UnquotedString
   | CreationDateTag ~ Iso8601DateTime
-}
+)}
 
 
 // 3.4 Typedef Frames
 
 TypedefFrame = {
-    "[Typedef]" ~ nl
-    ~ "id:" ~ ClassId ~ EOL
+    WhitespaceChar* ~ "[Typedef]" ~ nl
+    ~ WhitespaceChar* ~ "id:" ~ ClassId ~ EOL
     ~ (TypedefClauseLine | nl)*
 }
 TypedefClauseLine = {
     TypedefClause ~ EOL
 }
-TypedefClause = {
+TypedefClause = { WhitespaceChar* ~ (
     IsAnonymousTag ~ Boolean
   | NameTag ~ UnquotedString
   | NamespaceTag ~ NamespaceId
@@ -317,20 +317,20 @@ TypedefClause = {
   | ExpandExpressionToTag ~ QuotedString ~ XrefList
   | IsMetadataTagTag ~ Boolean
   | IsClassLevelTag ~ Boolean
-}
+)}
 
 
 // 3.5 Instance Frames
 
 InstanceFrame = {
-    "[Instance]" ~ nl
-    ~ "id:" ~ InstanceId ~ EOL
+    WhitespaceChar* ~ "[Instance]" ~ nl
+    ~ WhitespaceChar* ~"id:" ~ InstanceId ~ EOL
     ~ (InstanceClauseLine | nl)*
 }
 InstanceClauseLine = {
     InstanceClause ~ EOL
 }
-InstanceClause = {
+InstanceClause = { WhitespaceChar* ~ (
     IsAnonymousTag ~ Boolean
   | NameTag ~ UnquotedString
   | NamespaceTag ~ NamespaceId
@@ -348,7 +348,7 @@ InstanceClause = {
   | IsObsoleteTag ~ Boolean
   | ReplacedByTag ~ InstanceId
   | ConsiderTag ~ Id
-}
+)}
 
 
 // 3.6 Synonym scope

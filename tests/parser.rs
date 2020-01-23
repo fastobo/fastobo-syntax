@@ -37,6 +37,10 @@ fn header_clause() {
         HeaderClause,
         r#"synonymtypedef: systematic_synonym "Systematic synonym" EXACT"#
     );
+    test_parse!(
+        HeaderClause,
+        r#"   format-version: 1.4"#
+    );
 }
 
 #[test]
@@ -69,6 +73,15 @@ fn synonym() {
         Synonym,
         r#""ciliated organ of asymmetry" EXACT_TYPE [ZFIN:ZDB-PUB-050221-4]"#
     );
+}
+
+#[test]
+fn term_frame() {
+    test_parse!(TermFrame, "[Term]\nid: TEST:001\ndef: \"test item\" []\n");
+    // with indentation
+    test_parse!(TermFrame, "[Term]\n id: TEST:001\ndef: \"test item\" []\n");
+    test_parse!(TermFrame, "[Term]\nid: TEST:001\n def: \"test item\" []\n");
+    test_parse!(TermFrame, " [Term]\nid: TEST:001\ndef: \"test item\" []\n");
 }
 
 #[test]
