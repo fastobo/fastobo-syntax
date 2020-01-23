@@ -1,6 +1,6 @@
 [package]
 name = "fastobo-syntax"
-version = "0.3.7"
+version = "0.3.8"
 authors = ["Martin Larralde <martin.larralde@ens-paris-saclay.fr>"]
 license = "MIT"
 readme = "README.md"

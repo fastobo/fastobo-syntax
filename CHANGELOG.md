@@ -7,12 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.7...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.8...HEAD
+
+
+## [v0.3.8] - 2020-01-23
+
+[v0.3.7]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.7...v0.3.8
+
+### Fixed
+- Made `grammar.pest` support indented frames and clauses (event unconsistently).
 
 
 ## [v0.3.7] - 2020-01-18
 
-[v0.3.7]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.6...v0.3.7
+[v0.3.7]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.6...v0.3.7
 
 ### Fixed
 - Slightly improve parsing of quoted strings in `grammar.pest`.
@@ -21,7 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.3.6] - 2019-10-05
 
-[v0.3.6]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.5...v0.3.6
+[v0.3.6]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.5...v0.3.6
 
 ### Fixed
 - `SynonymScope` rule change breaking `synonymtypedef` header clauses.
@@ -29,7 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.3.5] - 2019-10-05 - **YANKED**
 
-[v0.3.5]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.4...v0.3.5
+[v0.3.5]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.4...v0.3.5
 
 ### Fixed
 - `Synonym` production rule breaking on valid synonyms with `v0.3.4`.
@@ -37,7 +45,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.3.4] - 2019-10-05 - **YANKED**
 
-[v0.3.4]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.3...v0.3.4
+[v0.3.4]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.3...v0.3.4
 
 ### Added
 - Added BOSC 2019 poster reference to `README.md`.
@@ -48,7 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.3.3] - 2019-07-23
 
-[v0.3.3]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.2...v0.3.3
+[v0.3.3]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.2...v0.3.3
 
 ### Changed
 - `Iso8601DateTime` rule to allow parsing `Iso8601Fraction` with `f32::from_str`.
@@ -56,7 +64,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.3.2] - 2019-07-23
 
-[v0.3.2]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.1...v0.3.2
+[v0.3.2]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.1...v0.3.2
 
 ### Fixed
 - `Iso8601DateTime` rule support for dates with fractional seconds components.
@@ -64,7 +72,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.3.1] - 2019-06-04
 
-[v0.3.1]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.3.0...v0.3.1
+[v0.3.1]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.0...v0.3.1
 
 ### Fixed
 - `XrefId` rule allowing whitespaces, causing a bug with some Xref lists.
@@ -72,7 +80,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.3.0] - 2019-05-14
 
-[v0.3.0]: https://github.com/fastobo/fastobo-syntax/compare/syntax/v0.2.1...v0.3.0
+[v0.3.0]: https://github.com/fastobo/fastobo-syntax/compare/v0.2.1...v0.3.0
 
 ### Added
 - Support for `is_asymmetric` typedef clause in grammar.
@@ -80,7 +88,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v0.2.1] - 2019-05-09
 
-[v0.2.1]: https://github.com/fastobo/fastobo-syntax/compare/syntax/43b728e...v0.2.1
+[v0.2.1]: https://github.com/fastobo/fastobo-syntax/compare/43b728e...v0.2.1
 
 ### Changed
 - Outsourced crate to `fastobo/fastobo-syntax` GitHub repository.
