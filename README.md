@@ -2,7 +2,7 @@
 
 *PEG Syntax and pest parser for the OBO flat file format 1.4*
 
-[![TravisCI](https://img.shields.io/travis/fastobo/fastobo-syntax/master.svg?maxAge=600&style=flat-square)](https://travis-ci.org/fastobo/fastobo-syntax/branches)
+[![TravisCI](https://img.shields.io/travis/com/fastobo/fastobo-syntax/master.svg?maxAge=600&style=flat-square)](https://travis-ci.com/fastobo/fastobo-syntax/branches)
 [![Codecov](https://img.shields.io/codecov/c/gh/fastobo/fastobo-syntax/master.svg?style=flat-square&maxAge=600)](https://codecov.io/gh/fastobo/fastobo-syntax)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&maxAge=2678400)](https://choosealicense.com/licenses/mit/)
 [![Source](https://img.shields.io/badge/source-GitHub-303030.svg?maxAge=2678400&style=flat-square)](https://github.com/fastobo/fastobo-syntax/)

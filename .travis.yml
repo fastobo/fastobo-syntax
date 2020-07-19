@@ -28,8 +28,6 @@ before_cache:
 
 deploy:
   - provider: cargo
-    token:
-      secure: SoomEad6IXtEz8bYGPVMpASjzBGjDuwZ0IN073Uq/tMbPUrY8qcC9DmNlg+0qBD0s9hTPe1Wx9xv+1iy2qux1pm7ORI4tBsK9dhLq63Sjtm2MoBREe32zyPq7tmN0SGz+va7ZZ9R+h6WgwR/O3vGv6sMSb9R1U/ij4hHe4LyJRz9i8Su0m3bLKhCThikQaje4otsvwF7hj58I88RK9e1DfvG53zzazDv0AaSy22SlGdorJs6u9ESz9qmD5/bQSrPQ/RVJeVl62rymVY/BEn6SA988l7IFUq+3yzOrM1tzb1zGD/RhtpRnvZi+BiyMrbgX4wBZTHA9I6NVOlTra8lVanmQxuaylXI6egC4nwgVd3BpOj7dm5nALw9n/l086vGRosqerBxBBjOcyML7k44yRxz2zV6+V8Dl7J9PA+qxddnpTDzTG9cqDmzXgSt6nQxwY9CW+RshrO0tDqMui7nzPROjc4fYy8XCOwoYCH2BW3x7UeFlLO2rc22lixws9+buoqrudvDCRT0yB0bfP9zCSVskMlxorYP+j0yo+pMSyTu4r85XO3FFgEIS4rBZafMMbHPipb2JuZSSZhQ8zL3HbcJTZA1OJO5KWCEeQeqjToza9dyb6kNDHc9XeaqTFJJhJePaowaQj6oNuY8ZOejtkP+FxOtD4ObTkNImtQmxXM=
     on:
       rust: stable
       tags: true
