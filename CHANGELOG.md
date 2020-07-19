@@ -7,7 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.8...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.4.0...HEAD
+
+## [v0.4.0] - 2020-07-20
+
+[v0.4.0]: https://github.com/fastobo/fastobo-syntax/compare/v0.3.8...v0.4.0
+
+
+### Added
+- Support for ignoring full comment lines in entity and frames 
+  ([#1](https://github.com/fastobo/fastobo-syntax/issues/1)).
 
 
 ## [v0.3.8] - 2020-01-23
