@@ -99,9 +99,12 @@ NonWsChar   = @{ !(WhitespaceChar) ~ !(NewlineChar) ~ OboChar }
 
 // 2.3 Line Termination
 
-EOL = { QualifierList? ~ HiddenComment? ~ nl  }
+EOL = { QualifierList? ~ Comment? ~ nl  }
 
-HiddenComment  = ${ "!" ~ ( !NewlineChar ~ UniCodeChar )* }
+Comment        =  { CommentPrefix ~ CommentText }
+CommentPrefix  = _{ WhitespaceChar* ~ "!" }
+CommentText    = ${ ( !NewlineChar ~ UniCodeChar )* }
+CommentSilent  = _{ Comment }
 
 QualifierChar  = @{ !("=" | "," | "}" | "{" | "\"") ~ NonWsChar }
 QualifierId    = @{ QualifierChar+ }
@@ -166,7 +169,7 @@ EntitySingle = _{ EntityFrame ~ EOI }  // NB(@althonos): for iterative parsers.
 
 // 3.2 Obo Headers
 
-HeaderFrame = { (HeaderClause? ~ nl)* ~ HeaderClause? }
+HeaderFrame = { ((HeaderClause | CommentSilent)? ~ nl)* ~ HeaderClause? ~ (nl ~ CommentSilent?)* }
 
 NaiveDateTime =  { NaiveDate ~ NaiveTime }
 NaiveDate     = ${ NaiveDay ~ ":" ~ NaiveMonth ~ ":" ~ NaiveYear }
@@ -232,9 +235,11 @@ Unreserved = @{
 // 3.3 Term Frames
 
 TermFrame = {
-    WhitespaceChar* ~ "[Term]" ~ nl
+    (CommentSilent? ~ nl)*
+    ~ WhitespaceChar* ~ "[Term]" ~ nl
+    ~ (CommentSilent? ~ nl)*
     ~ WhitespaceChar* ~ "id:" ~ ClassId ~ EOL
-    ~ (TermClauseLine | nl)*
+    ~ (TermClauseLine | CommentSilent? ~ nl)*
 }
 TermClauseLine = {
     TermClause ~ EOL
@@ -268,9 +273,11 @@ TermClause = { WhitespaceChar* ~ (
 // 3.4 Typedef Frames
 
 TypedefFrame = {
-    WhitespaceChar* ~ "[Typedef]" ~ nl
+    (CommentSilent? ~ nl)*
+    ~ WhitespaceChar* ~ "[Typedef]" ~ nl
+    ~ (CommentSilent? ~ nl)*
     ~ WhitespaceChar* ~ "id:" ~ ClassId ~ EOL
-    ~ (TypedefClauseLine | nl)*
+    ~ (TypedefClauseLine | CommentSilent? ~ nl)*
 }
 TypedefClauseLine = {
     TypedefClause ~ EOL
@@ -323,9 +330,11 @@ TypedefClause = { WhitespaceChar* ~ (
 // 3.5 Instance Frames
 
 InstanceFrame = {
-    WhitespaceChar* ~ "[Instance]" ~ nl
+      (CommentSilent? ~ nl)*
+    ~ WhitespaceChar* ~ "[Instance]" ~ nl
+    ~ (CommentSilent? ~ nl)*
     ~ WhitespaceChar* ~"id:" ~ InstanceId ~ EOL
-    ~ (InstanceClauseLine | nl)*
+    ~ (InstanceClauseLine | CommentSilent? ~ nl)*
 }
 InstanceClauseLine = {
     InstanceClause ~ EOL

@@ -112,7 +112,7 @@ fn xreflist() {
 #[test]
 fn header_frame() {
     // with Unix endlines
-    test_parse!(HeaderFrame, r#"format-version: 1.4\ndata-version: 1\n"#);
+    test_parse!(HeaderFrame, "format-version: 1.4\ndata-version: 1\n");
     // with Windows endlines
-    test_parse!(HeaderFrame, r#"format-version: 1.4\r\ndata-version: 1\r\n"#);
+    test_parse!(HeaderFrame, "format-version: 1.4\r\ndata-version: 1\r\n");
 }
