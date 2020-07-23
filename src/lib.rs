@@ -8,9 +8,9 @@ use pest::iterators::Pairs;
 /// The OBO format version 1.4 parser.
 #[derive(Debug, Parser)]
 #[grammar = "grammar.pest"]
-pub struct OboParser;
+pub struct OboLexer;
 
-impl OboParser {
+impl OboLexer {
     /// Parse an input string using the given production rule.
     ///
     /// This is basically a specialized version of [`pest::Parser::parse`]

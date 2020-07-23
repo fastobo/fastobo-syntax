@@ -17,7 +17,7 @@
 
 This library is a strict implementation of the [OBO flat file format 1.4](http://owlcollab.github.io/oboformat/doc/obo-syntax.html)
 syntax using the [`pest`](https://pest.rs/) parser generator. It was outsourced from
-[`fastobo`](https://github.com/fastobo/fastobo/) to reduce compilation time, since deriving the `OboParser` from
+[`fastobo`](https://github.com/fastobo/fastobo/) to reduce compilation time, since deriving the `OboLexer` from
 [`grammar.pest`](https://github.com/fastobo/fastobo-syntax/blob/master/src/grammar.pest) takes some time.
 
 The parser itself is reexported in [`fastobo::parser`](https://docs.rs/fastobo/latest/fastobo/parser/), so there
