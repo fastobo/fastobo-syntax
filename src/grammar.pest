@@ -376,10 +376,11 @@ Import = ${ Iri | Id }
 //                        accept unquoted string without whitespaces as well as
 //                        quoted strings for now.
 
-PropertyValue = { RelationId ~ (((QuotedString | PvValue) ~ XsdDatatype) | Id) }
+UnquotedPropertyValueTarget = @{ NonWsChar+ }
 
-PvValue       = @{ NonWsChar+ }
-XsdDatatype   = @{ "xsd:" ~ ASCII_ALPHANUMERIC+ }
+PropertyValue = { LiteralPropertyValue | ResourcePropertyValue }
+LiteralPropertyValue = { RelationId ~ (QuotedString | UnquotedPropertyValueTarget) ~ Id  }
+ResourcePropertyValue = { RelationId ~ Id }
 
 
 // Annex I: Iri Grammar from [RFC3987]
