@@ -93,7 +93,7 @@ nl             = _{ WhitespaceChar* ~ NewlineChar}
 // 2.2.2 Special Characters
 
 UniCodeChar = @{ ANY }
-OboChar     = @{ ("\\" ~ UniCodeChar) | (!"\\" ~ !"\n" ~ !"!" ~ UniCodeChar) }
+OboChar     = @{ ("\\" ~ UniCodeChar) | (!"\\" ~ !"\n" ~ !"!" ~ !"{" ~ UniCodeChar) }
 NonWsChar   = @{ !(WhitespaceChar) ~ !(NewlineChar) ~ OboChar }
 
 

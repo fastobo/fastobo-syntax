@@ -48,6 +48,11 @@ fn qualifier_list() {
     test_parse!(
         QualifierList,
         r#"{comment="NYBG:Dario_Cavaliere", comment="NYBG:Brandon_Sinn"}"#
+    );
+
+    test_parse!(
+        QualifierList,
+        r#"{comment="Depicted by field contains hematoxylin and eosin staining section of a stage 2 embryo. Scale bar = 100um"}"#
     )
 }
 
@@ -85,6 +90,12 @@ fn term_frame() {
 }
 
 #[test]
+fn term_clause_line() {
+    test_parse!(TermClauseLine, "property_value: foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png {comment=\"Depicted by field contains hematoxylin and eosin staining section of a stage 2 embryo. Scale bar = 100um\"}\n");
+    test_parse!(TermClauseLine, "property_value: foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png ! depicted by field\n");
+}
+
+#[test]
 fn xref() {
     // Xref ID only
     test_parse!(Xref, r#"https://www.ncbi.nlm.nih.gov/pubmed/28402395"#);
@@ -115,4 +126,11 @@ fn header_frame() {
     test_parse!(HeaderFrame, "format-version: 1.4\ndata-version: 1\n");
     // with Windows endlines
     test_parse!(HeaderFrame, "format-version: 1.4\r\ndata-version: 1\r\n");
+}
+
+#[test]
+fn property_value() {
+    test_parse!(PropertyValue, "foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png");
+    test_parse!(ResourcePropertyValue, "foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png");
+    test_not_parse!(LiteralPropertyValue, "foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png");
 }
