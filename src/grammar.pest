@@ -249,7 +249,7 @@ TermClause = { WhitespaceChar* ~ (
   | NameTag ~ UnquotedString
   | NamespaceTag ~ NamespaceId
   | AltIdTag ~ Id
-  | DefTag ~ QuotedString ~ XrefList
+  | DefTag ~ Definition
   | CommentTag ~ UnquotedString
   | SubsetTag ~ SubsetId
   | SynonymTag ~ Synonym
@@ -287,7 +287,7 @@ TypedefClause = { WhitespaceChar* ~ (
   | NameTag ~ UnquotedString
   | NamespaceTag ~ NamespaceId
   | AltIdTag ~ Id
-  | DefTag ~ QuotedString ~ XrefList
+  | DefTag ~ Definition
   | CommentTag ~ UnquotedString
   | SubsetTag ~ SubsetId
   | SynonymTag ~ Synonym
@@ -344,7 +344,7 @@ InstanceClause = { WhitespaceChar* ~ (
   | NameTag ~ UnquotedString
   | NamespaceTag ~ NamespaceId
   | AltIdTag ~ Id
-  | DefTag ~ QuotedString ~ XrefList
+  | DefTag ~ Definition
   | CommentTag ~ UnquotedString
   | SubsetTag ~ SubsetId
   | SynonymTag ~ Synonym
@@ -369,6 +369,7 @@ Synonym = { QuotedString ~ SynonymScopeSingle ~ SynonymTypeId? ~ XrefList }
 // 4.0 Misc
 
 Import = ${ Iri | Id }
+Definition = { QuotedString ~ XrefList }
 
 // WORKAROUND(@althonos): the 1.4 spec requires all property values to be
 //                        quote-enclosed, but this is not done currently by the
