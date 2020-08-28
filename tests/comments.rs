@@ -5,7 +5,7 @@ use fastobo_syntax::Rule;
 
 macro_rules! test_parse {
     ($rule:ident, $input:literal) => ({
-        match OboLexer::parse(Rule::$rule, $input) {
+        match OboLexer::tokenize(Rule::$rule, $input) {
             Ok(mut pairs) => assert_eq!(pairs.next().unwrap().as_str(), $input),
             Err(e) => panic!("could not parse {:?}:\n{}", $input, e),
         }

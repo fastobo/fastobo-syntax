@@ -20,8 +20,8 @@ syntax using the [`pest`](https://pest.rs/) parser generator. It was outsourced 
 [`fastobo`](https://github.com/fastobo/fastobo/) to reduce compilation time, since deriving the `OboLexer` from
 [`grammar.pest`](https://github.com/fastobo/fastobo-syntax/blob/master/src/grammar.pest) takes some time.
 
-The parser itself is reexported in [`fastobo::parser`](https://docs.rs/fastobo/latest/fastobo/parser/), so there
-is probably no need to depend on this crate directly.
+The lexer itself is reexported in [`fastobo::parser`](https://docs.rs/fastobo/latest/fastobo/parser/),
+so there is probably no need to depend on this crate directly.
 
 
 ## Strictness
@@ -58,9 +58,8 @@ reproducible situation.
 This project was developed by [Martin Larralde](https://github.com/althonos)
 as part of a Master's Degree internship in the [BBOP team](http://berkeleybop.org/) of the
 [Lawrence Berkeley National Laboratory](https://www.lbl.gov/), under the supervision of
-[Chris Mungall](http://biosciences.lbl.gov/profiles/chris-mungall/). Cite this project as:
+[Chris Mungall](http://biosciences.lbl.gov/profiles/chris-mungall/). Please cite this project as:
 
 *Larralde M.* **Developing Python and Rust libraries to improve the ontology ecosystem**
 *\[version 1; not peer reviewed\].* F1000Research 2019, 8(ISCB Comm J):1500 (poster)
 ([https://doi.org/10.7490/f1000research.1117405.1](https://doi.org/10.7490/f1000research.1117405.1))
-
