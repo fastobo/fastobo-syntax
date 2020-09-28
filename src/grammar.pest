@@ -394,8 +394,11 @@ ResourcePropertyValue = { RelationId ~ Id }
 
 Iri = @{ IriScheme ~ ":" ~ IriHierPart ~ ("?" ~ IriQuery)? ~ ("#" ~ IriFragment)? }
 
+// NB(@althonos): IriPathAbEmpty is not mandatory if we reach the end of input
+//                here to allow URLs to hosts without trailing slashes, e.g.
+///               'http://example.com', which would be rejected otherwise.
 IriHierPart = {
-    ("//" ~ IriAuthority ~ IriPathAbempty )
+    ("//" ~ IriAuthority ~ (IriPathAbempty | EOI) )
   | IriPathAbsolute
   | IriPathRootless
   | IriPathEmpty
@@ -411,7 +414,7 @@ IriPathAbempty  = ${ ("/" ~ IriSegment)+ }
 IriPathAbsolute = ${ "/" ~ (IriSegmentNz ~ ("/" ~ IriSegment)* )? }
 IriPathNoScheme = ${ IriSegmentNzNc ~ ("/" ~ IriSegment)* }
 IriPathRootless = ${ IriSegmentNz ~ ("/" ~ IriSegment)* }
-IriPathEmpty    = ${ "0" ~ IriIpChar}
+IriPathEmpty    = ${ "" }
 
 IriSegment     = @{ IriIpChar* }
 IriSegmentNz   = @{ IriIpChar+ }

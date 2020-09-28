@@ -87,6 +87,9 @@ fn term_frame() {
     test_parse!(TermFrame, "[Term]\n id: TEST:001\ndef: \"test item\" []\n");
     test_parse!(TermFrame, "[Term]\nid: TEST:001\n def: \"test item\" []\n");
     test_parse!(TermFrame, " [Term]\nid: TEST:001\ndef: \"test item\" []\n");
+    // url id
+    test_parse!(TermFrame, "[Term]\nid: http://example.com\ndef: \"test item\" []\n");
+    test_parse!(TermFrame, "[Term]\nid: http://example.com/\ndef: \"test item\" []\n");
 }
 
 #[test]
@@ -133,4 +136,24 @@ fn property_value() {
     test_parse!(PropertyValue, "foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png");
     test_parse!(ResourcePropertyValue, "foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png");
     test_not_parse!(LiteralPropertyValue, "foaf:depiction http://purl.obolibrary.org/obo/plana/images/Stage2.png");
+}
+
+#[test]
+fn iri() {
+    test_parse!(Iri, "http://example.com");
+    test_parse!(Iri, "http://example.com/");
+    test_parse!(Iri, "http://example.com/with/a/path");
+    test_parse!(Iri, "http://user:pass@example.com");
+    test_parse!(Iri, "http://user:pass@example.com/");
+    test_parse!(Iri, "http://user:pass@example.com/with/a/path");
+}
+
+#[test]
+fn term_clause() {
+    test_parse!(TermClause, "xref: http://example.com");
+    test_parse!(TermClause, "xref: http://example.com/");
+    test_parse!(TermClause, "xref: http://example.com/with/a/path");
+    test_parse!(TermClause, "xref: http://user:pass@example.com");
+    test_parse!(TermClause, "xref: http://user:pass@example.com/");
+    test_parse!(TermClause, "xref: http://user:pass@example.com/with/a/path");
 }
