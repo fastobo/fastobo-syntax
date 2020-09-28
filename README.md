@@ -1,6 +1,6 @@
 # `fastobo-syntax` [![Star me](https://img.shields.io/github/stars/fastobo/fastobo-syntax.svg?style=social&label=Star&maxAge=3600)](https://github.com/fastobo/fastobo-syntax/stargazers)
 
-*PEG Syntax and pest parser for the OBO flat file format 1.4*
+*PEG Syntax and pest lexer for the OBO flat file format 1.4.*
 
 [![TravisCI](https://img.shields.io/travis/com/fastobo/fastobo-syntax/master.svg?maxAge=600&style=flat-square)](https://travis-ci.com/fastobo/fastobo-syntax/branches)
 [![Codecov](https://img.shields.io/codecov/c/gh/fastobo/fastobo-syntax/master.svg?style=flat-square&maxAge=600)](https://codecov.io/gh/fastobo/fastobo-syntax)
@@ -32,7 +32,7 @@ The syntax is a strict implementation of the 1.4 format, with the following exce
   to support some ontology files using `obo2owl` or the `owlapi` to generate their OBO
   counterpart, which does not quote-enclose property values
   ([owlcs/owlapi#833](https://github.com/owlcs/owlapi/pull/833)).
-* ISO-8601 datetimes can only be parsed from the canonical format (`ỲYYY-MM-DDTHH:MM:SS`)
+* ISO-8601 datetimes can only be parsed from the canonical format (`YYYY-MM-DDTHH:MM:SS`)
   with an optional timezone. Week dates and calendar dates are not supported.
 
 

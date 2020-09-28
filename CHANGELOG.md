@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.1...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.2...HEAD
+
+## [v0.6.2] - 20202-09-28
+[v0.6.2]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.1...v0.6.2
+### Fixed
+- Parser crashing on URLs missing a trailing slash after the host component
+  (e.g. `http://example.com`).
 
 ## [v0.6.1] - 2020-08-28
 [v0.6.1]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.0...v0.6.1
