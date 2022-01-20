@@ -8,8 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 [Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.0...HEAD
 
+## [v0.7.1] - 2022-01-20
+[v0.7.1]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.0...v0.7.1
+### Changed
+- Move `Iso8601Timezone` into the `Iso8601Time` production rule.
+
 ## [v0.7.0] - 2022-01-20
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.2...v0.7.0
+[v0.7.0]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.2...v0.7.0
 ### Changed
 - `creation_date` clauses can now take an `Iso8601Date` without the time specifier.
 ### Fixed
