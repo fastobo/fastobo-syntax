@@ -266,7 +266,7 @@ TermClause = { WhitespaceChar* ~ (
   | ReplacedByTag ~ ClassId
   | ConsiderTag ~ ClassId
   | CreatedByTag ~ UnquotedString
-  | CreationDateTag ~ Iso8601DateTime
+  | CreationDateTag ~ CreationDate
 )}
 
 
@@ -319,7 +319,7 @@ TypedefClause = { WhitespaceChar* ~ (
   | ReplacedByTag ~ RelationId
   | ConsiderTag ~ Id
   | CreatedByTag ~ UnquotedString
-  | CreationDateTag ~ Iso8601DateTime
+  | CreationDateTag ~ CreationDate
   | ExpandAssertionToTag ~ QuotedString ~ XrefList
   | ExpandExpressionToTag ~ QuotedString ~ XrefList
   | IsMetadataTagTag ~ Boolean
@@ -353,7 +353,7 @@ InstanceClause = { WhitespaceChar* ~ (
   | InstanceOfTag ~ ClassId
   | RelationshipTag ~ RelationId ~ InstanceId
   | CreatedByTag ~ UnquotedString
-  | CreationDateTag ~ Iso8601DateTime
+  | CreationDateTag ~ CreationDate
   | IsObsoleteTag ~ Boolean
   | ReplacedByTag ~ InstanceId
   | ConsiderTag ~ Id
@@ -383,6 +383,14 @@ PropertyValue = { LiteralPropertyValue | ResourcePropertyValue }
 LiteralPropertyValue = { RelationId ~ (QuotedString | UnquotedPropertyValueTarget) ~ Id  }
 ResourcePropertyValue = { RelationId ~ Id }
 
+// WORKAROUND(@althonos): the 1.4 spec requires that creation dates are marked
+//                        in ISO8601 DateTime, but the 1.4 guide is vague and
+//                        and there are some cases in the wild where the tag
+//                        value only contains an ISO8601 Date. To accomodate
+//                        for this, we try to parse as a DateTime first, and
+//                        fallback to a Date if it fails.
+
+CreationDate = ${ Iso8601DateTime | Iso8601Date }
 
 // Annex I: Iri Grammar from [RFC3987]
 //
@@ -462,10 +470,11 @@ IriIpv6Address      = ${
 
 
 // Annex II: ISO-8601 Grammar for DateTime w/ Timezone
-Iso8601DateTime = ${Iso8601Date ~ "T" ~ Iso8601Time ~ Iso8601TimeZone? }
+Iso8601DateTime     = ${ Iso8601Date ~ Iso8601DateTimeTime }
+Iso8601DateTimeTime = ${ "T" ~ Iso8601Time ~ Iso8601TimeZone? }
 
 Iso8601Date    = ${ Iso8601Year ~ Iso8601DateSep? ~ Iso8601Month ~ Iso8601DateSep? ~ Iso8601Day }
-Iso8601DateSep = _{ "-" | "–" }
+Iso8601DateSep = _{ "-" | "−" | "–" }
 Iso8601Year    = @{ ASCII_DIGIT{4} }
 Iso8601Month   = @{ ASCII_DIGIT{1,2} }
 Iso8601Day     = @{ ASCII_DIGIT{1,2} }
@@ -478,4 +487,7 @@ Iso8601Minute   = @{ ('0'..'5') ~ ('0'..'9') }
 Iso8601Second   = @{ (('0'..'5') ~ ('0'..'9')) | "60" }
 Iso8601Fraction = @{ Iso8601DecSep ~ ('0'..'9')+ }
 
-Iso8601TimeZone = ${ "Z" | (("+" | "-") ~ Iso8601Hour ~ (":"? ~ Iso8601Minute)? ) }
+Iso8601TimeZoneSign   = ${ "+" | "-" | "−" | "–" }
+Iso8601TimeZoneUtc    = ${ "Z" }
+Iso8601TimeZoneOffset = ${ Iso8601TimeZoneSign ~ Iso8601Hour ~ Iso8601TimeSep? ~ Iso8601Minute }
+Iso8601TimeZone       = ${ Iso8601TimeZoneUtc | Iso8601TimeZoneOffset }
