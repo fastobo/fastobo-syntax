@@ -2,8 +2,8 @@
 
 *PEG Syntax and pest lexer for the OBO flat file format 1.4.*
 
+[![Actions](https://img.shields.io/github/workflow/status/fastobo/fastobo-syntax/Test?style=flat-square&maxAge=600)](https://github.com/fastobo/fastobo-syntax/actions)
 [![TravisCI](https://img.shields.io/travis/com/fastobo/fastobo-syntax/master.svg?maxAge=600&style=flat-square)](https://travis-ci.com/fastobo/fastobo-syntax/branches)
-[![Codecov](https://img.shields.io/codecov/c/gh/fastobo/fastobo-syntax/master.svg?style=flat-square&maxAge=600)](https://codecov.io/gh/fastobo/fastobo-syntax)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&maxAge=2678400)](https://choosealicense.com/licenses/mit/)
 [![Source](https://img.shields.io/badge/source-GitHub-303030.svg?maxAge=2678400&style=flat-square)](https://github.com/fastobo/fastobo-syntax/)
 [![Crate](https://img.shields.io/crates/v/fastobo-syntax.svg?maxAge=600&style=flat-square)](https://crates.io/crates/fastobo-syntax)
@@ -34,6 +34,9 @@ The syntax is a strict implementation of the 1.4 format, with the following exce
   ([owlcs/owlapi#833](https://github.com/owlcs/owlapi/pull/833)).
 * ISO-8601 datetimes can only be parsed from the canonical format (`YYYY-MM-DDTHH:MM:SS`)
   with an optional timezone. Week dates and calendar dates are not supported.
+* Dates in `creation_date` clauses can be either full ISO-8601 datetimes
+  (as recommended by the format 1.4 specifications) or simply ISO-8601 dates,
+  which is suggested by the format 1.4 guide (albeit non-normative).
 
 
 ## See also
