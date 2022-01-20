@@ -32,9 +32,17 @@ fn iso_datetime_compact() {
 #[test]
 fn creation_date_datetime() {
     test_parse!(TypedefClause, "creation_date: 2018-09-05T09:48:03Z");
+    test_parse!(
+        TermFrame,
+        "[Term]\nid: TST:001\n creation_date: 2015-08-11T15:05:12Z\n"
+    );
 }
 
 #[test]
 fn creation_date_date() {
     test_parse!(TypedefClause, "creation_date: 2018-09-05");
+    test_parse!(
+        TermFrame,
+        "[Term]\nid: TST:001\n creation_date: 2015-08-11\n"
+    );
 }
