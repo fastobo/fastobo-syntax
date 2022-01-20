@@ -6,9 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.2...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.0...HEAD
 
-## [v0.6.2] - 20202-09-28
+## [v0.7.0] - 2022-01-20
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.2...v0.7.0
+### Changed
+- `creation_date` clauses can now take an `Iso8601Date` without the time specifier.
+### Fixed
+- `Iso8601TimeZoneSign` now accepts the mathematical minus sign (`−`).
+
+## [v0.6.2] - 2020-09-28
 [v0.6.2]: https://github.com/fastobo/fastobo-syntax/compare/v0.6.1...v0.6.2
 ### Fixed
 - Parser crashing on URLs missing a trailing slash after the host component
@@ -25,10 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `Definition` production rule to match value of *def* clauses.
 ### Changed
 - Renamed `OboLexer::parse` to `OboLexer::tokenize`.
-- `PropertyValue` production rule now has two subrules `ResourcePropertyValue`
-  and `LiteralPropertyValue` to aid constructing enum variants.
-- `LiteralPropertyValue` accepts any identifier as a datatype, not just
-  `xsd`-prefixed datatypes.
+- `PropertyValue` production rule now has two subrules `ResourcePropertyValue` and `LiteralPropertyValue` to aid constructing enum variants.
+- `LiteralPropertyValue` accepts any identifier as a datatype, not just `xsd`-prefixed datatypes.
 
 ## [v0.5.0] - 2020-07-23
 [v0.5.0]: https://github.com/fastobo/fastobo-syntax/compare/v0.4.0...v0.5.0
