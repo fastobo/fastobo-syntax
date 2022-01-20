@@ -470,8 +470,7 @@ IriIpv6Address      = ${
 
 
 // Annex II: ISO-8601 Grammar for DateTime w/ Timezone
-Iso8601DateTime     = ${ Iso8601Date ~ Iso8601DateTimeTime }
-Iso8601DateTimeTime = ${ "T" ~ Iso8601Time ~ Iso8601TimeZone? }
+Iso8601DateTime     = ${ Iso8601Date ~ "T" ~ Iso8601Time }
 
 Iso8601Date    = ${ Iso8601Year ~ Iso8601DateSep? ~ Iso8601Month ~ Iso8601DateSep? ~ Iso8601Day }
 Iso8601DateSep = _{ "-" | "−" | "–" }
@@ -479,7 +478,7 @@ Iso8601Year    = @{ ASCII_DIGIT{4} }
 Iso8601Month   = @{ ASCII_DIGIT{1,2} }
 Iso8601Day     = @{ ASCII_DIGIT{1,2} }
 
-Iso8601Time     = ${ Iso8601Hour ~ Iso8601TimeSep? ~ Iso8601Minute ~ Iso8601TimeSep? ~ Iso8601Second ~ Iso8601Fraction?  }
+Iso8601Time     = ${ Iso8601Hour ~ Iso8601TimeSep? ~ Iso8601Minute ~ Iso8601TimeSep? ~ Iso8601Second ~ Iso8601Fraction? ~ Iso8601TimeZone? }
 Iso8601TimeSep  = _{":"}
 Iso8601DecSep   = _{"." | ","}
 Iso8601Hour     = @{ (('0'..'1') ~ ('0'..'9')) | "2" ~ '0'..'4' }
