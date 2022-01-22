@@ -101,15 +101,13 @@ NonWsChar   = @{ !(WhitespaceChar) ~ !(NewlineChar) ~ OboChar }
 
 EOL = { QualifierList? ~ Comment? ~ nl  }
 
+Qualifier      = ${ Id ~ "=" ~ QuotedString }
+QualifierList  =  { "{" ~ Qualifier ~ ("," ~ Qualifier)* ~ "}" }
+
 Comment        =  { CommentPrefix ~ CommentText }
 CommentPrefix  = _{ WhitespaceChar* ~ "!" }
 CommentText    = ${ ( !NewlineChar ~ UniCodeChar )* }
 CommentSilent  = _{ Comment }
-
-QualifierChar  = @{ !("=" | "," | "}" | "{" | "\"") ~ NonWsChar }
-QualifierId    = @{ QualifierChar+ }
-Qualifier      = ${ QualifierId ~ "=" ~ QuotedString }
-QualifierList  =  { "{" ~ Qualifier ~ ("," ~ Qualifier)* ~ "}" }
 
 // 2.4 Clause Values
 
@@ -134,8 +132,8 @@ SynonymTypeId = { !"[" ~ Id }
 NamespaceId   = { Id }
 SubsetId      = { Id }
 
-Id           = ${ UrlId | PrefixedId | UnprefixedId }
-UrlId        = @{ ("http" | "https") ~ ":" ~ (NonWsChar)* }
+Id           = ${ Curie }
+UrlId        = @{ Iri }
 UnprefixedId = @{ ( !":" ~ NonWsChar )+ }
 PrefixedId   = ${ IdPrefix ~ ":" ~ IdLocal }
 
@@ -151,11 +149,7 @@ NonCanonicalIdLocal = @{ NonWsChar* }
 // 2.6 Xref Lists
 
 Xref         = { Id ~ QuotedString? }
-
-XrefChar     = ${ !"," ~ !"]" ~ NonWsChar }
-XrefId       = @{ XrefChar+ }
-XrefListItem = { XrefId ~ QuotedString? }
-XrefList     = {"[" ~ XrefListItem? ~ ("," ~ XrefListItem)* ~ "]"}
+XrefList     = {"[" ~ Xref? ~ ("," ~ Xref)* ~ "]"}
 
 // 3 Obo Grammar
 
@@ -431,7 +425,7 @@ IriSegmentNzNc = @{ (IriUnreserved | IriPctEncoded | IriSubDelims | "@")+ }
 IriQuery    = @{ (IriIpChar | IriPrivate | "/" | "?")* }
 IriFragment = @{ (IriIpChar | "/" | "?")* }
 
-IriScheme     = @{ ASCII_ALPHA ~ (ASCII_ALPHA | ASCII_DIGIT | "+" | "-" | ".")* }
+IriScheme     = ${ ASCII_ALPHA ~ (ASCII_ALPHA | ASCII_DIGIT | "+" | "-" | ".")* }
 IriPort       = @{ ASCII_DIGIT* }
 
 IriPrivate    = ${ '\u{E000}'..'\u{F8FF}' | '\u{F0000}'..'\u{FFFFD}' | '\u{100000}'..'\u{10FFFD}' }
@@ -439,7 +433,7 @@ IriPctEncoded = ${ "%" ~ ASCII_HEX_DIGIT ~ ASCII_HEX_DIGIT }
 IriUnreserved = @{ ASCII_ALPHA | ASCII_DIGIT | "-" | "." | "_" | "~" }
 IriReserved   = @{ IriGenDelims | IriSubDelims }
 IriGenDelims  = @{":" | "/" | "?" | "#" | "[" | "]" | "@"}
-IriSubDelims  = @{"!" | "$" | "&" | "'" | "(" | ")" | "*" | "+" | "," | ";" | "="}
+IriSubDelims  = @{"$" | "&" | "'" | "(" | ")" | "*" | "+" | ";" | "\\=" | "\\," | "\\!"}  // note: modified not to accept ',' or "!"
 IriDecOctet   = ${
     ASCII_DIGIT
   | (('1' .. '9') ~ ASCII_DIGIT)
@@ -452,7 +446,7 @@ IriIpChar = { IriUnreserved | IriPctEncoded | IriSubDelims | ":" | "@" }
 IriIpLiteral = { "[" ~ (IriIpv6Address ~ IriIpvFutureAddress)* ~ "]" }
 
 IriIpv6H16  = ${ ASCII_HEX_DIGIT{1,4} }
-IriIpv6Ls32 = { (IriIpv6H16 ~ ":" ~ IriIpv6H16) | IriIpv4Address }
+IriIpv6Ls32 = ${ (IriIpv6H16 ~ ":" ~ IriIpv6H16) | IriIpv4Address }
 
 IriIpv4Address      = ${ IriDecOctet ~ "." ~ IriDecOctet ~ "." ~ IriDecOctet ~ "." ~ IriDecOctet }
 IriIpvFutureAddress = ${ "v" ~ ASCII_HEX_DIGIT+ ~ "." ~ (IriUnreserved | IriSubDelims | ":")+ }
@@ -468,8 +462,135 @@ IriIpv6Address      = ${
   | ( ((IriIpv6H16 ~ ":"){6} ~ IriIpv6H16)? ~ "::")
 }
 
+IriReference  = ${ Iri | IriRelativeRef }
+IriRelativeRef = ${ IriRelativePart ~ ( "?" ~ IriQuery ) ? ~ ( "#" ~ IriFragment ) ? }
+IriRelativePart = ${
+    ("//" ~ IriAuthority ~ IriPathAbempty)
+  | IriPathAbsolute
+  | IriPathNoScheme
+  | IriPathEmpty
+}
 
-// Annex II: ISO-8601 Grammar for DateTime w/ Timezone
+// Annex II: CURIE
+
+NCName = ${ (ASCII_ALPHA | "_") ~ NCNameChar* }
+NCNameChar = ${ ASCII_ALPHA | ASCII_DIGIT | "." | "-" | "_" | CombiningChar | Extender }
+CombiningChar = ${
+    '\u{0300}' .. '\u{0345}'
+  | '\u{0360}' .. '\u{0361}'
+  | '\u{0483}' .. '\u{0486}'
+  | '\u{0591}' .. '\u{05A1}'
+  | '\u{05A3}' .. '\u{05B9}'
+  | '\u{05BB}' .. '\u{05BD}'
+  | "\u{05BF}"
+  | '\u{05C1}' .. '\u{05C2}'
+  | "\u{05C4}"
+  | '\u{064B}' .. '\u{0652}'
+  | "\u{0670}"
+  | '\u{06D6}' .. '\u{06DC}'
+  | '\u{06DD}' .. '\u{06DF}'
+  | '\u{06E0}' .. '\u{06E4}'
+  | '\u{06E7}' .. '\u{06E8}'
+  | '\u{06EA}' .. '\u{06ED}'
+  | '\u{0901}' .. '\u{0903}'
+  | "\u{093C}"
+  | '\u{093E}' .. '\u{094C}'
+  | "\u{094D}"
+  | '\u{0951}' .. '\u{0954}'
+  | '\u{0962}' .. '\u{0963}'
+  | '\u{0981}' .. '\u{0983}'
+  | "\u{09BC}"
+  | "\u{09BE}"
+  | "\u{09BF}"
+  | '\u{09C0}' .. '\u{09C4}'
+  | '\u{09C7}' .. '\u{09C8}'
+  | '\u{09CB}' .. '\u{09CD}'
+  | "\u{09D7}"
+  | '\u{09E2}' .. '\u{09E3}'
+  | "\u{0A02}"
+  | "\u{0A3C}"
+  | "\u{0A3E}"
+  | "\u{0A3F}"
+  | '\u{0A40}' .. '\u{0A42}'
+  | '\u{0A47}' .. '\u{0A48}'
+  | '\u{0A4B}' .. '\u{0A4D}'
+  | '\u{0A70}' .. '\u{0A71}'
+  | '\u{0A81}' .. '\u{0A83}'
+  | "\u{0ABC}"
+  | '\u{0ABE}' .. '\u{0AC5}'
+  | '\u{0AC7}' .. '\u{0AC9}'
+  | '\u{0ACB}' .. '\u{0ACD}'
+  | '\u{0B01}' .. '\u{0B03}'
+  | "\u{0B3C}"
+  | '\u{0B3E}' .. '\u{0B43}'
+  | '\u{0B47}' .. '\u{0B48}'
+  | '\u{0B4B}' .. '\u{0B4D}'
+  | '\u{0B56}' .. '\u{0B57}'
+  | '\u{0B82}' .. '\u{0B83}'
+  | '\u{0BBE}' .. '\u{0BC2}'
+  | '\u{0BC6}' .. '\u{0BC8}'
+  | '\u{0BCA}' .. '\u{0BCD}'
+  | "\u{0BD7}"
+  | '\u{0C01}' .. '\u{0C03}'
+  | '\u{0C3E}' .. '\u{0C44}'
+  | '\u{0C46}' .. '\u{0C48}'
+  | '\u{0C4A}' .. '\u{0C4D}'
+  | '\u{0C55}' .. '\u{0C56}'
+  | '\u{0C82}' .. '\u{0C83}'
+  | '\u{0CBE}' .. '\u{0CC4}'
+  | '\u{0CC6}' .. '\u{0CC8}'
+  | '\u{0CCA}' .. '\u{0CCD}'
+  | '\u{0CD5}' .. '\u{0CD6}'
+  | '\u{0D02}' .. '\u{0D03}'
+  | '\u{0D3E}' .. '\u{0D43}'
+  | '\u{0D46}' .. '\u{0D48}'
+  | '\u{0D4A}' .. '\u{0D4D}'
+  | "\u{0D57}"
+  | "\u{0E31}"
+  | '\u{0E34}' .. '\u{0E3A}'
+  | '\u{0E47}' .. '\u{0E4E}'
+  | "\u{0EB1}"
+  | '\u{0EB4}' .. '\u{0EB9}'
+  | '\u{0EBB}' .. '\u{0EBC}'
+  | '\u{0EC8}' .. '\u{0ECD}'
+  | '\u{0F18}' .. '\u{0F19}'
+  | "\u{0F35}"
+  | "\u{0F37}"
+  | "\u{0F39}"
+  | "\u{0F3E}"
+  | "\u{0F3F}"
+  | '\u{0F71}' .. '\u{0F84}'
+  | '\u{0F86}' .. '\u{0F8B}'
+  | '\u{0F90}' .. '\u{0F95}'
+  | "\u{0F97}"
+  | '\u{0F99}' .. '\u{0FAD}'
+  | '\u{0FB1}' .. '\u{0FB7}'
+  | "\u{0FB9}"
+  | '\u{20D0}' .. '\u{20DC}'
+  | "\u{20E1}"
+  | '\u{302A}' .. '\u{302F}'
+  | "\u{3099}"
+  | "\u{309A}"
+}
+Extender = ${
+    "\u{00B7}"
+  | "\u{02D0}"
+  | "\u{02D1}"
+  | "\u{0387}"
+  | "\u{0640}"
+  | "\u{0E46}"
+  | "\u{0EC6}"
+  | "\u{3005}"
+  | '\u{3031}' .. '\u{3035}'
+  | '\u{309D}' .. '\u{309E}'
+  | '\u{30FC}' .. '\u{30FE}'
+}
+
+Curie          = ${ (CuriePrefix ~ ":")? ~ CurieReference }
+CuriePrefix    = ${ NCName }
+CurieReference = ${ IriRelativeRef }
+
+// Annex III: ISO-8601 Grammar for DateTime w/ Timezone
 Iso8601DateTime     = ${ Iso8601Date ~ "T" ~ Iso8601Time }
 
 Iso8601Date    = ${ Iso8601Year ~ Iso8601DateSep? ~ Iso8601Month ~ Iso8601DateSep? ~ Iso8601Day }
