@@ -135,7 +135,7 @@ NamespaceId   = { Id }
 SubsetId      = { Id }
 
 Id           = ${ UrlId | PrefixedId | UnprefixedId }
-UrlId        = @{ ("http" | "https") ~ ":" ~ (NonWsChar)* }
+UrlId        = @{ IriScheme ~ "://" ~ IriAuthority ~ IriPathAbempty ~ ("?" ~ IriQuery)? ~ ("#" ~ IriFragment)? }
 UnprefixedId = @{ ( !":" ~ NonWsChar )+ }
 PrefixedId   = ${ IdPrefix ~ ":" ~ IdLocal }
 
@@ -436,7 +436,7 @@ IriPort       = @{ ASCII_DIGIT* }
 
 IriPrivate    = ${ '\u{E000}'..'\u{F8FF}' | '\u{F0000}'..'\u{FFFFD}' | '\u{100000}'..'\u{10FFFD}' }
 IriPctEncoded = ${ "%" ~ ASCII_HEX_DIGIT ~ ASCII_HEX_DIGIT }
-IriUnreserved = @{ ASCII_ALPHA | ASCII_DIGIT | "-" | "." | "_" | "~" }
+IriUnreserved = @{ ("\\" ~ IriReserved) | ASCII_ALPHA | ASCII_DIGIT | "-" | "." | "_" | "~" }
 IriReserved   = @{ IriGenDelims | IriSubDelims }
 IriGenDelims  = @{":" | "/" | "?" | "#" | "[" | "]" | "@"}
 IriSubDelims  = @{"!" | "$" | "&" | "'" | "(" | ")" | "*" | "+" | "," | ";" | "="}
