@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.2...HEAD
+
+## [v0.7.2] - 2022-02-11
+[v0.7.2]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.1...v0.7.2
+### Fixed
+- Parsing of `UrlId` with scheme other than `http`.
+### Changed
+- Allow escaping reserved OBO characters with backslashes in IRIs.
 
 ## [v0.7.1] - 2022-01-20
 [v0.7.1]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.0...v0.7.1
