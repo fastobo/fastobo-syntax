@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.2...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.3...HEAD
+
+## [v0.7.3] - 2022-03-04
+[v0.7.3]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.2...v0.7.3
+### Added
+- `OboLexer::tokenize_all` method to make sure the entire input is parsed.
 
 ## [v0.7.2] - 2022-02-11
 [v0.7.2]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.1...v0.7.2
