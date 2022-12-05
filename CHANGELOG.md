@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.3...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.4...HEAD
+
+## [v0.7.4] - 2022-12-05
+[v0.7.4]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.3...v0.7.4
+### Added
+- Re-export the `pest` crate in the crate namespace.
+### Changed
+- Bumped `pest` dependency to `v2.5.1`.
 
 ## [v0.7.3] - 2022-03-04
 [v0.7.3]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.2...v0.7.3
