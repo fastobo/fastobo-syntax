@@ -1,6 +1,6 @@
 #[macro_use]
 extern crate pest_derive;
-extern crate pest;
+pub extern crate pest;
 
 use pest::error::Error;
 use pest::error::ErrorVariant;
