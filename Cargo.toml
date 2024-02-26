@@ -20,5 +20,5 @@ repository = "fastobo/fastobo-syntax"
 status     = "actively-developed"
 
 [dependencies]
-pest = "2.5.1"
-pest_derive = "2.5.1"
+pest = "2.7"
+pest_derive = "2.7"
