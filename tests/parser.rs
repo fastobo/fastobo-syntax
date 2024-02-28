@@ -30,7 +30,6 @@ fn header_clause() {
         HeaderClause,
         r#"synonymtypedef: systematic_synonym "Systematic synonym" EXACT"#
     );
-    test_parse!(HeaderClause, r#"   format-version: 1.4"#);
 }
 
 #[test]
@@ -131,6 +130,14 @@ fn header_frame() {
     test_parse!(HeaderFrame, "format-version: 1.4\ndata-version: 1\n");
     // with Windows endlines
     test_parse!(HeaderFrame, "format-version: 1.4\r\ndata-version: 1\r\n");
+    // with indentation
+    test_parse!(
+        HeaderFrame,
+        r#"   
+        format-version: 1.4
+            data-version:       2.0
+        "#
+    );
 }
 
 #[test]
