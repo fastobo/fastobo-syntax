@@ -6,7 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
-[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.4...HEAD
+[Unreleased]: https://github.com/fastobo/fastobo-syntax/compare/v0.8.0...HEAD
+
+## [v0.8.0] - 2024-02-28
+[v0.8.0]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.4...v0.8.0
+### Changed
+- Bump `pest` dependency to `v2.7`.
+- Change rules for unreserved tags.
+- Split `Boolean` rule into two sub-rules for `true` and `false` literals.
+- Rename rules from ISO-8601 specification.
 
 ## [v0.7.4] - 2022-12-05
 [v0.7.4]: https://github.com/fastobo/fastobo-syntax/compare/v0.7.3...v0.7.4
