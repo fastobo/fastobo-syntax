@@ -13,20 +13,20 @@ macro_rules! test_parse {
 
 #[test]
 fn iso_datetime_utc() {
-    test_parse!(Iso8601DateTime, "2018-09-05T09:48:03Z");
-    test_parse!(Iso8601DateTime, "2018-09-05T09:48:03.106Z");
+    test_parse!(ISO8601_DateTime, "2018-09-05T09:48:03Z");
+    test_parse!(ISO8601_DateTime, "2018-09-05T09:48:03.106Z");
 }
 
 #[test]
 fn iso_datetime_offset() {
-    test_parse!(Iso8601DateTime, "2018-09-05T09:48:03+01:00");
-    test_parse!(Iso8601DateTime, "2018-09-05T09:48:03-03:30");
-    test_parse!(Iso8601DateTime, "2018-09-05T09:48:03−03:30");
+    test_parse!(ISO8601_DateTime, "2018-09-05T09:48:03+01:00");
+    test_parse!(ISO8601_DateTime, "2018-09-05T09:48:03-03:30");
+    test_parse!(ISO8601_DateTime, "2018-09-05T09:48:03−03:30");
 }
 
 #[test]
 fn iso_datetime_compact() {
-    test_parse!(Iso8601DateTime, "20180905T094803Z");
+    test_parse!(ISO8601_DateTime, "20180905T094803Z");
 }
 
 #[test]

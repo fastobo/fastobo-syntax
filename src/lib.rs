@@ -8,7 +8,10 @@ use pest::iterators::Pairs;
 
 /// The OBO format version 1.4 lexer.
 #[derive(Debug, Parser)]
-#[grammar = "grammar.pest"]
+#[grammar = "obo14.pest"]
+#[grammar = "bcp47.pest"]
+#[grammar = "iso8601.pest"]
+#[grammar = "rfc3987.pest"]
 pub struct OboLexer;
 
 impl OboLexer {

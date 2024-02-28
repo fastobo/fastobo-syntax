@@ -136,8 +136,9 @@ SynonymTypeId = { !"[" ~ Id }
 NamespaceId   = { Id }
 SubsetId      = { Id }
 
+Iri          = _{ RFC3987_Iri }
 Id           = ${ UrlId | PrefixedId | UnprefixedId }
-UrlId        = @{ IriScheme ~ "://" ~ IriAuthority ~ IriPathAbempty ~ ("?" ~ IriQuery)? ~ ("#" ~ IriFragment)? }
+UrlId        = @{ RFC3987_IriScheme ~ "://" ~ RFC3987_IriAuthority ~ RFC3987_IriPathAbempty ~ ("?" ~ RFC3987_IriQuery)? ~ ("#" ~ RFC3987_IriFragment)? }
 UnprefixedId = @{ ( !":" ~ NonWsChar )+ }
 PrefixedId   = ${ IdPrefix ~ ":" ~ IdLocal }
 
@@ -393,103 +394,4 @@ ResourcePropertyValue = { RelationId ~ Id }
 //                        for this, we try to parse as a DateTime first, and
 //                        fallback to a Date if it fails.
 
-CreationDate = ${ Iso8601DateTime | Iso8601Date }
-
-// Annex I: Iri Grammar from [RFC3987]
-//
-// NB(@althonos): Since the `iri_string` crate is then used to parse the IRI,
-//                there is no need for a proper tokenization of the IRI components.
-//
-//                Ideally, this would reside in another grammar file, but Pest
-//                2.0 doesn't support sharing rules between files.
-
-Iri = @{ IriScheme ~ ":" ~ IriHierPart ~ ("?" ~ IriQuery)? ~ ("#" ~ IriFragment)? }
-
-// NB(@althonos): IriPathAbEmpty is not mandatory if we reach the end of input
-//                here to allow URLs to hosts without trailing slashes, e.g.
-///               'http://example.com', which would be rejected otherwise.
-IriHierPart = {
-    ("//" ~ IriAuthority ~ (IriPathAbempty | EOI) )
-  | IriPathAbsolute
-  | IriPathRootless
-  | IriPathEmpty
-}
-
-IriAuthority = ${ (IriUserInfo ~ "@")? ~ IriHost ~ (":" ~ IriPort)?}
-IriUserInfo  = ${ (IriUnreserved | IriPctEncoded | IriSubDelims | ":")* }
-IriHost      = ${ IriIpLiteral | IriIpv4Address | IriRegName }
-IriRegName   = ${ (IriUnreserved | IriPctEncoded | IriSubDelims)* }
-
-IriPath         = ${IriPathAbempty | IriPathAbsolute | IriPathNoScheme | IriPathRootless | IriPathEmpty}
-IriPathAbempty  = ${ ("/" ~ IriSegment)+ }
-IriPathAbsolute = ${ "/" ~ (IriSegmentNz ~ ("/" ~ IriSegment)* )? }
-IriPathNoScheme = ${ IriSegmentNzNc ~ ("/" ~ IriSegment)* }
-IriPathRootless = ${ IriSegmentNz ~ ("/" ~ IriSegment)* }
-IriPathEmpty    = ${ "" }
-
-IriSegment     = @{ IriIpChar* }
-IriSegmentNz   = @{ IriIpChar+ }
-IriSegmentNzNc = @{ (IriUnreserved | IriPctEncoded | IriSubDelims | "@")+ }
-
-IriQuery    = @{ (IriIpChar | IriPrivate | "/" | "?")* }
-IriFragment = @{ (IriIpChar | "/" | "?")* }
-
-IriScheme     = @{ ASCII_ALPHA ~ (ASCII_ALPHA | ASCII_DIGIT | "+" | "-" | ".")* }
-IriPort       = @{ ASCII_DIGIT* }
-
-IriPrivate    = ${ '\u{E000}'..'\u{F8FF}' | '\u{F0000}'..'\u{FFFFD}' | '\u{100000}'..'\u{10FFFD}' }
-IriPctEncoded = ${ "%" ~ ASCII_HEX_DIGIT ~ ASCII_HEX_DIGIT }
-IriUnreserved = @{ ("\\" ~ IriReserved) | ASCII_ALPHA | ASCII_DIGIT | "-" | "." | "_" | "~" }
-IriReserved   = @{ IriGenDelims | IriSubDelims }
-IriGenDelims  = @{":" | "/" | "?" | "#" | "[" | "]" | "@"}
-IriSubDelims  = @{"!" | "$" | "&" | "'" | "(" | ")" | "*" | "+" | "," | ";" | "="}
-IriDecOctet   = ${
-    ASCII_DIGIT
-  | (('1' .. '9') ~ ASCII_DIGIT)
-  | ("1" ~ ASCII_DIGIT ~ ASCII_DIGIT)
-  | ("2" ~ ('0' .. '4') ~ ASCII_DIGIT)
-  | ("25" ~ ('0' .. '5'))
-}
-
-IriIpChar = { IriUnreserved | IriPctEncoded | IriSubDelims | ":" | "@" }
-IriIpLiteral = { "[" ~ (IriIpv6Address ~ IriIpvFutureAddress)* ~ "]" }
-
-IriIpv6H16  = ${ ASCII_HEX_DIGIT{1,4} }
-IriIpv6Ls32 = { (IriIpv6H16 ~ ":" ~ IriIpv6H16) | IriIpv4Address }
-
-IriIpv4Address      = ${ IriDecOctet ~ "." ~ IriDecOctet ~ "." ~ IriDecOctet ~ "." ~ IriDecOctet }
-IriIpvFutureAddress = ${ "v" ~ ASCII_HEX_DIGIT+ ~ "." ~ (IriUnreserved | IriSubDelims | ":")+ }
-IriIpv6Address      = ${
-    ( (IriIpv6H16 ~ ":"){6} ~ IriIpv6Ls32 )
-  | ( "::" ~ (IriIpv6H16 ~ ":"){5} ~ IriIpv6Ls32 )
-  | ( IriIpv6H16? ~ "::" ~ (IriIpv6H16 ~ ":"){4} ~ IriIpv6Ls32 )
-  | ( ((IriIpv6H16 ~ ":"){1} ~ IriIpv6H16)? ~ "::" ~ (IriIpv6H16 ~ ":"){3} ~ IriIpv6Ls32)
-  | ( ((IriIpv6H16 ~ ":"){2} ~ IriIpv6H16)? ~ "::" ~ (IriIpv6H16 ~ ":"){2} ~ IriIpv6Ls32)
-  | ( ((IriIpv6H16 ~ ":"){3} ~ IriIpv6H16)? ~ "::" ~ IriIpv6H16 ~ ":" ~ IriIpv6Ls32)
-  | ( ((IriIpv6H16 ~ ":"){4} ~ IriIpv6H16)? ~ "::" ~ IriIpv6Ls32)
-  | ( ((IriIpv6H16 ~ ":"){5} ~ IriIpv6H16)? ~ "::" ~ IriIpv6H16)
-  | ( ((IriIpv6H16 ~ ":"){6} ~ IriIpv6H16)? ~ "::")
-}
-
-
-// Annex II: ISO-8601 Grammar for DateTime w/ Timezone
-Iso8601DateTime     = ${ Iso8601Date ~ "T" ~ Iso8601Time }
-
-Iso8601Date    = ${ Iso8601Year ~ Iso8601DateSep? ~ Iso8601Month ~ Iso8601DateSep? ~ Iso8601Day }
-Iso8601DateSep = _{ "-" | "−" | "–" }
-Iso8601Year    = @{ ASCII_DIGIT{4} }
-Iso8601Month   = @{ ASCII_DIGIT{1,2} }
-Iso8601Day     = @{ ASCII_DIGIT{1,2} }
-
-Iso8601Time     = ${ Iso8601Hour ~ Iso8601TimeSep? ~ Iso8601Minute ~ Iso8601TimeSep? ~ Iso8601Second ~ Iso8601Fraction? ~ Iso8601TimeZone? }
-Iso8601TimeSep  = _{":"}
-Iso8601DecSep   = _{"." | ","}
-Iso8601Hour     = @{ (('0'..'1') ~ ('0'..'9')) | "2" ~ '0'..'4' }
-Iso8601Minute   = @{ ('0'..'5') ~ ('0'..'9') }
-Iso8601Second   = @{ (('0'..'5') ~ ('0'..'9')) | "60" }
-Iso8601Fraction = @{ Iso8601DecSep ~ ('0'..'9')+ }
-
-Iso8601TimeZoneSign   = ${ "+" | "-" | "−" | "–" }
-Iso8601TimeZoneUtc    = ${ "Z" }
-Iso8601TimeZoneOffset = ${ Iso8601TimeZoneSign ~ Iso8601Hour ~ Iso8601TimeSep? ~ Iso8601Minute }
-Iso8601TimeZone       = ${ Iso8601TimeZoneUtc | Iso8601TimeZoneOffset }
+CreationDate = ${ ISO8601_DateTime | ISO8601_Date }
