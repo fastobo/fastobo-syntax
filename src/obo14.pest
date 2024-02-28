@@ -129,10 +129,10 @@ UnquotedString = @{ OboChar+ }
 //                but we actually want it as a `NonCanonicalIdLocal` without
 //                remaining output.
 
-ClassId       = { !"{" ~ Id }
+ClassId       = { Id }
 RelationId    = { Id }
 InstanceId    = { Id }
-SynonymTypeId = { !"[" ~ Id }
+SynonymTypeId = { Id }
 NamespaceId   = { Id }
 SubsetId      = { Id }
 
@@ -366,9 +366,13 @@ InstanceClause = { WhitespaceChar* ~ (
 
 // 3.6 Synonym scope
 
-SynonymScope = @{ "EXACT" | "BROAD" | "NARROW" | "RELATED" }
-SynonymScopeSingle = @{ ("EXACT" | "BROAD" | "NARROW" | "RELATED") ~ &ws }
-Synonym = { QuotedString ~ SynonymScopeSingle ~ SynonymTypeId? ~ XrefList }
+ExactSynonymScope = { "EXACT" }
+BroadSynonymScope = { "BROAD" }
+NarrowSynonymScope = { "NARROW" }
+RelatedSynonymScope = { "RELATED" }
+SynonymScope = @{ ExactSynonymScope | BroadSynonymScope | NarrowSynonymScope | RelatedSynonymScope }
+SynonymScopeSingle = @{ SynonymScope ~ &ws }
+Synonym = { QuotedString ~ SynonymScopeSingle ~ (XrefList | (SynonymTypeId ~ XrefList)) }
 
 // 4.0 Misc
 
