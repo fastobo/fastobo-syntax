@@ -33,6 +33,10 @@ fn typedef_frame() {
     test_parse!(EntityFrame, "! irrelevant\n[Typedef]\nid: TST:001\n");
     test_parse!(EntityFrame, "[Typedef]\n! irrelevant\nid: TST:001\n");
     test_parse!(EntityFrame, "[Typedef]\nid: TST:001\n! irrelevant\n");
+    test_parse!(
+        EntityFrame,
+        "[Typedef]\nid: TST:001\nrange: BFO:0000003 ! occurrent\n"
+    );
 }
 
 #[test]
