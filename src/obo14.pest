@@ -136,7 +136,7 @@ SynonymTypeId = { Id }
 NamespaceId   = { Id }
 SubsetId      = { Id }
 
-Iri          = _{ RFC3987_Iri }
+Iri          =  { RFC3987_Iri }
 Id           = ${ UrlId | PrefixedId | UnprefixedId }
 UrlId        = @{ RFC3987_IriScheme ~ "://" ~ RFC3987_IriAuthority ~ RFC3987_IriPathAbempty ~ ("?" ~ RFC3987_IriQuery)? ~ ("#" ~ RFC3987_IriFragment)? }
 UnprefixedId = @{ ( !":" ~ NonWsChar )+ }
