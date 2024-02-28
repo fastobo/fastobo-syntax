@@ -364,12 +364,12 @@ InstanceClause = {
 
 // 3.6 Synonym scope
 
-ExactSynonymScope = { "EXACT" }
-BroadSynonymScope = { "BROAD" }
-NarrowSynonymScope = { "NARROW" }
-RelatedSynonymScope = { "RELATED" }
-SynonymScope = @{ ExactSynonymScope | BroadSynonymScope | NarrowSynonymScope | RelatedSynonymScope }
-Synonym = { QuotedString ~ SynonymScope ~ (XrefList | (SynonymTypeId ~ XrefList))  }
+ExactSynonymScope = ${ "EXACT" }
+BroadSynonymScope = ${ "BROAD" }
+NarrowSynonymScope = ${ "NARROW" }
+RelatedSynonymScope = ${ "RELATED" }
+SynonymScope = ${ ExactSynonymScope | BroadSynonymScope | NarrowSynonymScope | RelatedSynonymScope }
+Synonym = ${ QuotedString ~ ws ~ SynonymScope ~ ws ~ (XrefList | (SynonymTypeId ~ ws ~ XrefList))  }
 
 // 4.0 Misc
 
