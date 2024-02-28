@@ -1,6 +1,6 @@
 [package]
 name = "fastobo-syntax"
-version = "0.8.0"
+version = "0.8.1"
 authors = ["Martin Larralde <martin.larralde@embl.de>"]
 license = "MIT"
 readme = "README.md"
@@ -11,13 +11,6 @@ description = "PEG Syntax and pest parser for the OBO flat file format 1.4"
 edition = "2018"
 keywords = ["obo", "ontology", "obofoundry", "syntax", "parser"]
 categories = ["science", "parser-implementations"]
-
-[badges.travis-ci]
-repository = "fastobo/fastobo-syntax"
-[badges.is-it-maintained-issue-resolution]
-repository = "fastobo/fastobo-syntax"
-[badges.maintenance]
-status     = "actively-developed"
 
 [dependencies]
 pest = "2.7"
